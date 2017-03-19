@@ -62,7 +62,6 @@ static const QString get_full_key(const QString key, int colmn, int row);
 static int get_column_numb(const QString text);
 
 static int menu(int argc, char **argv);
-static void clear_space(QString &text);
 static int get_row_numb(QString text);
 static QString get_encr(ifstream &file);
 
@@ -84,15 +83,15 @@ int main(int argc, char *argv[]){
         return -FAILURE;
     }
 
-    ifstream encr_text(path_text);
-    if( !encr_text.is_open()){
+    ifstream encr_file(path_text);
+    if( !encr_file.is_open()){
         fprintf(stderr, "Can't open file with"
                         " options: %s\r\n", strerror(errno));
         return -FAILURE;
     }
 
     const QString keys = get_keys(opt_file);
-    const QString encr = get_encr(encr_text);
+    const QString encr = get_encr(encr_file);
 
     int colmn = get_column_numb(keys);
     int rows = get_row_numb(keys);
@@ -123,6 +122,22 @@ int main(int argc, char *argv[]){
     cout << "Your encr phrase: " << encr.toStdString() << endl;
     cout << "Your plain text: " << plain_text.toStdString() << endl;
     cout << endl;
+
+    ofstream plain_file("plaintext.txt", ios_base::out | ios_base::trunc);
+    if( !plain_file.is_open()){
+        fprintf(stderr, "Can't open/create file with"
+                        " options: %s\r\n", strerror(errno));
+        return -FAILURE;
+    }
+
+    plain_file.write(plain_text.toUtf8(), plain_text.toUtf8().length());
+
+    opt_file.close();
+    encr_file.close();
+    plain_file.close();
+
+    free(path_key);
+    free(path_text);
 
     return SUCCESS;
 }
