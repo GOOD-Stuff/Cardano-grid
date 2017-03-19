@@ -23,6 +23,6 @@ Then you will see the following:
         0010
 
     Your encr phrase: zуzzxxxxzz zxбxяzтzz xбxzzеzxxxxyyyycрccyбyрccаcаyтycкccyyyycc,c
-    Your plain text: у тебя брак,брат>
+    Your plain text: у тебя брак,брат
 
 At the output of the program you will receive a `plaintext.txt` file with the decrypted text.
