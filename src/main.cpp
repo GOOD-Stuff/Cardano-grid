@@ -388,7 +388,7 @@ static int get_row_numb(QString text){
             count_rows++;
         }
     }
-
+    count_rows++;
     return count_rows;
 }
 
