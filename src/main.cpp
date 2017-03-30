@@ -234,7 +234,7 @@ static const QString get_full_key(const QString key, int colmn, int row){
     }
 
     // II square
-    for( i = 0; i < row; i++ ){
+    for( i = 0; i < colmn; i++ ){
         for( j = square_length - colmn; j >= 0; j -= colmn ){
             full_key[incr++] = full_key.at(j + i);
         }
@@ -246,7 +246,7 @@ static const QString get_full_key(const QString key, int colmn, int row){
     }
 
     // IV square
-    for( i = 0; i < row; i++ ){
+    for( i = 0; i < colmn; i++ ){
         for( j = colmn - 1; j <= square_length - 1; j += colmn ){
             full_key[incr++] = full_key.at(j - i);
         }
